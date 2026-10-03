@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuzmol Islam Khan — Data Analyst</title>
+<meta name="description" content="Nuzmol Islam Khan — Data Analyst and BI Analyst skilled in SQL, Python, Power BI and Advanced Excel. Turning operational data into decisions.">
+<script>
+  /* theme flash theke bachar jonno age-i set kore nao */
+  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ============================= NAV ============================= -->
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Go to top">
+      <span class="brand-mark" id="brandInitials">NIK</span>
+      <span class="brand-text">
+        <span class="name" id="brandName">Nuzmol Islam Khan</span>
+        <span class="role" id="brandRole">Data Analyst</span>
+      </span>
+    </a>
+
+    <nav class="nav-tabs" id="navTabs" aria-label="Main">
+      <a href="#top">Home</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">What I Do</a>
+      <a href="#about">About</a>
+      <a href="#certifications">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-cta">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle light and dark theme"></button>
+      <a class="btn btn--outline btn--sm" id="cvLink" href="#" download>Download CV</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================= HERO ============================= -->
+  <section class="hero" id="top">
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <div class="hero-grid">
+
+        <div class="hero-copy">
+          <span class="status-pill"><span class="status-dot"></span><span id="heroStatus">Open to opportunities</span></span>
+          <div class="hero-hi">Hi, I'm</div>
+          <h1 id="heroName">Nuzmol <span>Islam Khan</span></h1>
+          <div class="hero-tags" id="heroTags"></div>
+          <p class="hero-bio" id="heroBio"></p>
+
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="#projects">View My Projects
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#contact">Contact Me</a>
+          </div>
+
+          <div class="socials" id="heroSocials"></div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="photo-wrap">
+            <div class="photo-card">
+              <img id="heroPhoto" src="" alt="Nuzmol Islam Khan">
+            </div>
+            <span class="photo-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><span id="photoTag">CSE Graduate</span></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= TICKER ============================= -->
+  <div class="ticker" aria-label="Key project results">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <!-- ============================= QUICK STATS ============================= -->
+  <section class="stats-bar">
+    <div class="wrap">
+      <div class="stats-grid" id="statsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================= SKILLS ============================= -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Capabilities</div>
+        <h2 class="section-title">Skills &amp; Tools</h2>
+        <p class="section-sub">The core stack I use to move from raw data to a decision-ready report.</p>
+      </div>
+      <div class="skills-grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================= PROJECTS ============================= -->
+  <section class="section section--alt" id="projects">
+    <div class="wrap">
+      <div class="section-head section-head--arrows reveal">
+        <div>
+          <div class="eyebrow">Portfolio</div>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-sub">End-to-end analyses, from raw data to findings people can act on.</p>
+        </div>
+        <div class="scroll-arrows">
+          <button class="scroll-arrow" id="projectsPrev" aria-label="Previous project">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="scroll-arrow" id="projectsNext" aria-label="Next project">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="projects-track" id="projectsGrid" tabindex="0" aria-label="Projects, scrolls automatically"></div>
+      <div class="slider-dots" id="sliderDots" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ============================= WHAT I DO ============================= -->
+  <section class="section flow" id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Process</div>
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-sub">The pipeline every project moves through, start to finish.</p>
+      </div>
+      <div class="flow-grid" id="flowGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================= ABOUT + EDUCATION ============================= -->
+  <section class="section section--alt" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-col reveal">
+          <div class="eyebrow">About Me</div>
+          <h2 class="section-title" id="aboutHeading"></h2>
+          <p id="aboutP1"></p>
+          <p id="aboutP2"></p>
+          <div class="fact-list" id="factList"></div>
+        </div>
+        <div class="edu-col">
+          <div class="eyebrow reveal">Background</div>
+          <h2 class="section-title reveal" style="margin-bottom:28px;">Education</h2>
+          <div class="timeline" id="educationTimeline"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= CERTIFICATIONS & ACHIEVEMENTS ============================= -->
+  <section class="section" id="certifications">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Credentials</div>
+        <h2 class="section-title">Certifications &amp; Achievements</h2>
+      </div>
+      <div class="certs-grid">
+        <div class="cert-list" id="certList"></div>
+        <div class="award-card reveal">
+          <div class="eyebrow">Achievement</div>
+          <div class="award-icon" id="awardIcon"></div>
+          <div class="award-title" id="awardTitle"></div>
+          <div class="award-text" id="awardText"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================= CONTACT / FOOTER ============================= -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-head">
+        <div class="eyebrow">Let's Work Together</div>
+        <h2>Open to Data Analyst &amp; BI roles</h2>
+        <p>I'm looking for an entry-level Data Analyst, BI Analyst or SQL Analyst position. If you have a role or a data problem worth solving, I'd love to hear from you.</p>
+        <div class="contact-actions">
+          <a class="btn btn--primary" id="emailBtn" href="#">Email Me</a>
+          <a class="btn btn--ghost" id="linkedinBtn" href="#" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        </div>
+      </div>
+      <div class="contact-cards" id="contactCards"></div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="wrap">
+      <p>&copy; <span id="footerYear"></span> <span id="footerName">Nuzmol Islam Khan</span>. All rights reserved.</p>
+      <div class="socials" id="footerSocials"></div>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6"/><path d="M6 12l6-6 6 6"/></svg>
+</button>
+
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
