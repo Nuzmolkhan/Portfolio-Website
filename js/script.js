@@ -285,6 +285,180 @@
     });
   });
 
+  /* -- Smooth cursor follower for mouse users -- */
+  const cursorFollower = $('cursorFollower');
+  const cursorLens = $('cursorLens');
+  const canFollowCursor = window.matchMedia(
+    '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
+  ).matches;
+  if (cursorFollower && cursorLens && canFollowCursor) {
+    const LENS_SIZE = 56;
+    const LENS_INSET = 2;
+    const MAGNIFICATION = 1.2;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let animationFrame = 0;
+    let isVisible = false;
+    let activeTarget = null;
+    let activeClone = null;
+    let savedMask = null;
+
+    const magnifiedProperties = [
+      'box-sizing', 'display', 'font', 'font-family', 'font-size', 'font-weight',
+      'font-style', 'line-height', 'letter-spacing', 'text-align', 'text-transform',
+      'text-decoration', 'white-space', 'color', '-webkit-text-fill-color',
+      'background', 'background-color', 'background-image', 'background-size',
+      'background-position', 'background-clip', '-webkit-background-clip',
+      'text-shadow', '-webkit-text-stroke', 'border', 'border-radius',
+      'box-shadow', 'opacity', 'object-fit', 'object-position', 'fill', 'stroke',
+      'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'transform',
+    ];
+
+    const findTarget = (node) => {
+      if (!(node instanceof Element)) return null;
+      const image = node.closest('img');
+      if (image) return image.closest('.photo-card, .project-thumb') || image;
+      const graphic = node.closest('svg');
+      if (graphic) return graphic;
+      return node.closest('h1, h2, h3, p, a, button');
+    };
+
+    const copyAppearance = (source, clone) => {
+      const computed = window.getComputedStyle(source);
+      magnifiedProperties.forEach((property) => {
+        clone.style.setProperty(property, computed.getPropertyValue(property));
+      });
+      for (let i = 0; i < source.children.length; i += 1) {
+        if (clone.children[i]) copyAppearance(source.children[i], clone.children[i]);
+      }
+    };
+
+    const restoreMask = () => {
+      if (!activeTarget || !savedMask) return;
+      ['mask-image', '-webkit-mask-image'].forEach((property) => {
+        const { value, priority } = savedMask[property];
+        if (value) activeTarget.style.setProperty(property, value, priority);
+        else activeTarget.style.removeProperty(property);
+      });
+      savedMask = null;
+    };
+
+    const clearLens = () => {
+      restoreMask();
+      cursorLens.replaceChildren();
+      activeTarget = null;
+      activeClone = null;
+    };
+
+    const updateLens = (target, x, y) => {
+      if (!target || !target.isConnected) {
+        clearLens();
+        cursorFollower.classList.remove('is-hovering');
+        return;
+      }
+
+      if (target !== activeTarget) {
+        clearLens();
+        const clone = target.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.removeAttribute('id');
+        clone.querySelectorAll('[id]').forEach((element) => element.removeAttribute('id'));
+        clone.querySelectorAll('a, button').forEach((element) => {
+          element.removeAttribute('href');
+          element.setAttribute('tabindex', '-1');
+        });
+        copyAppearance(target, clone);
+        cursorLens.replaceChildren(clone);
+        activeTarget = target;
+        activeClone = clone;
+        savedMask = {
+          'mask-image': {
+            value: target.style.getPropertyValue('mask-image'),
+            priority: target.style.getPropertyPriority('mask-image'),
+          },
+          '-webkit-mask-image': {
+            value: target.style.getPropertyValue('-webkit-mask-image'),
+            priority: target.style.getPropertyPriority('-webkit-mask-image'),
+          },
+        };
+      }
+
+      const rect = target.getBoundingClientRect();
+      const lensCenter = LENS_SIZE / 2 - LENS_INSET;
+      const left = lensCenter + (rect.left - x) * MAGNIFICATION;
+      const top = lensCenter + (rect.top - y) * MAGNIFICATION;
+      activeClone.style.setProperty('position', 'absolute', 'important');
+      activeClone.style.setProperty('display', 'block', 'important');
+      activeClone.style.setProperty('box-sizing', 'border-box', 'important');
+      activeClone.style.setProperty('left', `${left}px`, 'important');
+      activeClone.style.setProperty('top', `${top}px`, 'important');
+      activeClone.style.setProperty('width', `${rect.width}px`, 'important');
+      activeClone.style.setProperty('height', `${rect.height}px`, 'important');
+      activeClone.style.setProperty('max-width', 'none', 'important');
+      activeClone.style.setProperty('max-height', 'none', 'important');
+      activeClone.style.setProperty('margin', '0', 'important');
+      activeClone.style.setProperty('overflow', 'visible', 'important');
+      activeClone.style.setProperty('pointer-events', 'none', 'important');
+      activeClone.style.setProperty('transform-origin', 'top left', 'important');
+      activeClone.style.setProperty('transform', `scale(${MAGNIFICATION})`, 'important');
+
+      const radius = LENS_SIZE / 2 - LENS_INSET;
+      const centerX = x - rect.left;
+      const centerY = y - rect.top;
+      const mask = `radial-gradient(circle ${radius}px at ${centerX}px ${centerY}px, transparent 0, transparent ${radius - 1}px, #000 ${radius}px)`;
+      target.style.setProperty('mask-image', mask);
+      target.style.setProperty('-webkit-mask-image', mask);
+    };
+
+    const animateCursor = () => {
+      currentX += (targetX - currentX) * 0.18;
+      currentY += (targetY - currentY) * 0.18;
+      cursorFollower.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+      if (activeTarget) updateLens(activeTarget, currentX, currentY);
+
+      if (Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
+        animationFrame = requestAnimationFrame(animateCursor);
+      } else {
+        animationFrame = 0;
+      }
+    };
+
+    const hideCursor = () => {
+      isVisible = false;
+      cursorFollower.classList.remove('is-visible', 'is-hovering');
+      clearLens();
+    };
+
+    window.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
+
+      targetX = event.clientX;
+      targetY = event.clientY;
+      const magnifiableTarget = findTarget(event.target);
+      if (!isVisible) {
+        currentX = targetX;
+        currentY = targetY;
+        cursorFollower.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+        cursorFollower.classList.add('is-visible');
+        isVisible = true;
+      }
+
+      cursorFollower.classList.toggle('is-hovering', Boolean(magnifiableTarget));
+      updateLens(magnifiableTarget, targetX, targetY);
+      if (!animationFrame) animationFrame = requestAnimationFrame(animateCursor);
+    }, { passive: true });
+
+    document.addEventListener('scroll', () => {
+      if (isVisible && activeTarget) updateLens(activeTarget, currentX, currentY);
+    }, { passive: true, capture: true });
+    document.addEventListener('pointerout', (event) => {
+      if (!event.relatedTarget) hideCursor();
+    });
+    window.addEventListener('blur', hideCursor);
+  }
+
   /* -- Scroll progress + back-to-top -- */
   const bar = $('progress');
   const toTop = $('toTop');

@@ -24,7 +24,7 @@ const SITE_DATA = {
     linkedin: "https://www.linkedin.com/in/mdnuzmol/",
     github: "https://github.com/Nuzmolkhan",
     /* Real photo bosate: assets/images/profile/ e photo rakho (jemon profile.jpg) tarpor niche path bodlao */
-    photo: "assets/images/profile/pro_pic.jpg",
+    photo: "assets/images/profile/pp.png",
     resume: "assets/docs/Nuzmol_Islam_Khan_CV.pdf",
     availability: "Open to Data Analyst / BI Analyst roles",
     photoTag: "CSE Graduate",

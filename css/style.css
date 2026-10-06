@@ -130,6 +130,27 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
 /* scroll progress */
 .progress{ position:fixed; top:0; left:0; height:3px; width:0; background:var(--grad); z-index:200; }
 
+/* Single cursor ring with a clipped magnification lens */
+.cursor-follower{
+  display:none; position:fixed; top:0; left:0; z-index:250; pointer-events:none;
+  width:56px; height:56px; opacity:0; will-change:transform, opacity;
+  transition:opacity .18s ease;
+}
+.cursor-follower.is-visible{ opacity:1; }
+.cursor-follower__ring{
+  position:absolute; inset:0; border:1.5px solid var(--accent); border-radius:50%;
+  transition:border-color .18s ease;
+}
+.cursor-follower__lens{
+  position:absolute; inset:2px; overflow:hidden; border-radius:50%; pointer-events:none;
+}
+.cursor-follower.is-hovering .cursor-follower__ring{
+  border-color:var(--accent-2);
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .cursor-follower{ display:block; }
+}
+
 /* ============================= NAV ==================================== */
 .nav{
   position:sticky; top:0; z-index:100; height:var(--nav-h); display:flex; align-items:center;
@@ -228,12 +249,13 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
 .photo-wrap{ position:relative; width:100%; max-width:340px; }
 .photo-card{
   position:relative; aspect-ratio:4/5; border-radius:28px; padding:3px; overflow:hidden;
-  background:conic-gradient(from var(--ang,0deg), #5EEAD4, #818CF8, #FBBF24, #5EEAD4);
+  /* background:conic-gradient(from var(--ang,0deg), #5EEAD4, #818CF8, #FBBF24, #5EEAD4); */
   animation:spin 8s linear infinite; box-shadow:var(--shadow-hover);
 }
 @property --ang{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
 @keyframes spin{ to{ --ang:360deg; } }
-.photo-card img{ width:100%; height:100%; object-fit:cover; border-radius:25px; background:var(--bg-alt); }
+.photo-card img{ width:100%; height:100%; object-fit:cover; border-radius:25px; background:var(--bg-alt); transform:scale(1.5)}
+/* .photo-card:hover{ transform:scale(1.2); transition:transform 1s ease-in-out; } */
 .photo-tag{
   position:absolute; left:50%; bottom:-16px; transform:translateX(-50%);
   background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:10px 18px;
