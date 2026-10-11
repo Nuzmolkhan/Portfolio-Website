@@ -160,9 +160,14 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
 .nav .wrap{ display:flex; align-items:center; justify-content:space-between; width:100%; gap:16px; }
 .brand{ display:flex; align-items:center; gap:11px; flex-shrink:0; }
 .brand-mark{
-  width:40px; height:40px; border-radius:12px; background:var(--grad); color:var(--accent-ink);
+  position:relative; width:48px; height:48px; flex-shrink:0; overflow:hidden;
+  border-radius:12px; background:var(--grad); color:var(--accent-ink);
   display:flex; align-items:center; justify-content:center;
   font-family:var(--f-mono); font-weight:600; font-size:14px;
+}
+.brand-mark img{
+  position:absolute; top:50%; left:50%; width:280%; height:280%; max-width:none;
+  object-fit:contain; border-radius:inherit; transform:translate(-50%,-50%);
 }
 .brand-text{ display:flex; flex-direction:column; gap:5px; }
 .brand-text .name{ font-family:var(--f-display); font-weight:600; font-size:16px; line-height:1.1; }

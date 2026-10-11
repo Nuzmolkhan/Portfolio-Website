@@ -82,7 +82,7 @@ const SITE_DATA = {
       tag: "Python · SQL (DuckDB) · Hex",
       title: "Study Abroad Lead Funnel Analysis",
       dashboard: true,
-      image: "assets/images/projects/study-abroad-funnel.svg",
+      image: "assets/images/projects/study-abroad-funnel.png",
       description: "Analyzed 1,200 leads over 19 months in SQL and Python (window functions, QUALIFY, cross-tabs). The biggest channel brought 30% of leads and converted worst, while Referral won 48% vs 26% on a third of the follow-ups. Built a 6-tab interactive dashboard for channel, branch, counselor and market performance.",
       stat: "63% of leads drop off after consultation — the largest leak, and untracked",
       links: [
@@ -91,10 +91,21 @@ const SITE_DATA = {
       ],
     },
     {
+      tag: "Python · Statistics",
+      title: "Customer Churn Analysis",
+      dashboard: true,
+      image: "assets/images/projects/customers_churn_analysis.png",
+      description: "Analyzed 1,000 telecom customers with a 14.7% churn rate. Chi-squared tests showed contract type as the strongest driver, with month-to-month customers churning at 21.8% against 1.5% on two-year plans, and Month-to-month, Basic plan, Cash payers topping 30%. Recommended contract upgrade discounts, priority support for 3+ tickets and Auto Pay migration.",
+      stat: "Month-to-month churn 21.8% vs 1.5% on two-year contracts",
+      links: [
+        { label: "View on GitHub", url: "https://github.com/Nuzmolkhan/telecom-customer-churn-analysis" },
+      ],
+    },
+    {
       tag: "Microsoft Excel · Supply Chain",
       title: "Demand & Inventory Planning",
       dashboard: true,
-      image: "assets/images/projects/demand-inventory.svg",
+      image: "assets/images/projects/demand-inventory.png",
       description: "Tracked 298K units of demand against 283K received across 9 categories over 12 months. Company-wide accuracy looked fine at 95.1%, but split by category School Shoes sat below 30%. Recommended per-category buffer stock instead of one number for everything.",
       stat: "95.1% overall accuracy hid a category below 30%",
       links: [
@@ -102,9 +113,20 @@ const SITE_DATA = {
       ],
     },
     {
+      tag: "Microsoft Excel · Power Query",
+      title: "Employee Worklife Balance Analysis",
+      dashboard: true,
+      image: "assets/images/projects/employee_worklife_balance_analysis.png",
+      description: "Cleaned and modeled HR data in Power Query, then analyzed 1,233 current employees and 9.56M in total salary paid. Compared job satisfaction, education levels and work-life balance, and studied how salary spread varies by gender, years of service and employment type. Salary spend peaks at the 10-year service mark for both full-time staff and contractors, and everything is wrapped in an interactive dashboard with a year slicer.",
+      stat: "Salary spend peaks at the 10-year service mark",
+      links: [
+        { label: "View on GitHub", url: "https://github.com/Nuzmolkhan/Employee-performance-analysis" },
+      ],
+    },
+    {
       tag: "SQL Server · T-SQL · Analytics",
       title: "SQL Sales, Customer & Product Insights",
-      image: "assets/images/projects/sql-insights.svg",
+      image: "assets/images/projects/sql-insights.png",
       description: "Customer and product reports on a star-schema dataset (fact_sales, dim_customers, dim_products): recency, average order value, monthly spend, plus change-over-time, running totals, year-over-year benchmarking and part-to-whole analysis.",
       stat: "VIP / Regular / New customer segments · High / Mid / Low product tiers",
       links: [
@@ -119,7 +141,7 @@ const SITE_DATA = {
       description: "Front-end builds, SQL practice and analytics experiments, all open on GitHub. Take a look for the rest of my work.",
       stat: "22 public repositories",
       links: [
-        { label: "Browse GitHub", url: "https://github.com/Nuzmolkhan" },
+        { label: "Browse GitHub", url: "https://github.com/Nuzmolkhan?tab=repositories" },
       ],
     },
   ],

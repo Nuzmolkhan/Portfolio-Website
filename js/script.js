@@ -53,7 +53,6 @@
   const p = d.profile;
   document.title = `${p.name} — ${p.role}`;
   setText('brandName', p.name);
-  setText('brandInitials', p.initials);
   setText('brandRole', p.role);
   setText('heroStatus', p.availability);
   setText('heroBio', p.bio);
