@@ -9,8 +9,6 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)](#tech-stack)
 [![No build step](https://img.shields.io/badge/build-none-5EEAD4)](#getting-started)
 
-![Portfolio preview, dark theme](docs/preview-dark.png)
-
 </div>
 
 ---
@@ -165,9 +163,6 @@ It is a static site, so it deploys anywhere. For example, **GitHub Pages**:
 
 Netlify, Vercel and Cloudflare Pages also work: no build command, publish directory is the folder that contains `index.html`.
 
-## Light theme
-
-![Portfolio preview, light theme](docs/preview-light.png)
 
 ## Roadmap
 
